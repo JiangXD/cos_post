@@ -1,4 +1,4 @@
-#include <stdio.h>
+#include "stdio.h"
 #include <stdlib.h>
 #include <string.h>
 
@@ -10,11 +10,10 @@ int main()
    ssize_t linelen;
    printf("User Input:");
    linelen = getline(&line, &linecap, stdin);
-   FILE* myfp=popen("R --vanilla -q", "r+");
+   FILE* myfp=popen("R --vanilla --slave -q", "r+");
    fwrite(line, linelen, 1, myfp);
-   int i;
-   for(i=0; i<2 && (linelen = getline(&line, &linecap, myfp))>0; i++)
-      fwrite(line, linelen, 1, stdout);
+   linelen = getline(&line, &linecap, myfp);
+   fwrite(line, linelen, 1, stdout);
 
 
    pclose(myfp);
