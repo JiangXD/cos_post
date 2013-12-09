@@ -1,8 +1,8 @@
 library(ggplot2)
 
-set.seed(100)
+set.seed(10)
 mydf <- data.frame(x=1:100, y=rnorm(100))
-ret <- loess(y~x, data=mydf, span=0.35)
+ret <- loess(y~x, data=mydf, span=0.3)
 
 newX=seq(1,100,0.1)
 ret_p <- data.frame(x=newX, y=predict(ret, newdata=data.frame(x=newX)))
@@ -10,6 +10,7 @@ myborders <- newX[which(diff(diff(ret_p$y)>0)!=0L)+1L]
 k=diff(diff(ret_p$y)>0L)
 k=k[k!=0L]
 mystat=k[1]>0
+mystat0=mystat
 
 len=length(myborders)
 myborders <- (myborders[1:len-1]+myborders[2:len])/2
@@ -24,7 +25,7 @@ names(myp) <- c("x", "y")
 myp$x=as.numeric(myp$x)
 myp$y=as.numeric(myp$y)
 myp$type= 0; 
-if(mystat) myp$type = myp$type + c(0,1) else myp$type = myp$type + c(1,0) 
+if(mystat0) myp$type = myp$type + c(1,0) else myp$type = myp$type + c(0,1) 
 
 
 
