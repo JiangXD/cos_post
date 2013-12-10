@@ -12,13 +12,16 @@ k=diff(diff(diff(ret_p$y))>0L)
 k=k[k!=0L]
 mystat=k[1]>0
 
+#plot(ret_p$x[1:(length(ret_p$x)-2)], diff(diff(ret_p$y)), type="l")
+#abline(h=0)
+
 len=length(myborders)
 myborders <- (myborders[1:len-1]+myborders[2:len])/2
 
 myp <- sapply(as.data.frame(rbind(c(newX[1],myborders),
                                   c(myborders,newX[length(newX)]))),
               function(k){ mystat <<- !mystat;
-                optimize(f=function(x){diff(predict(ret, newdata=data.frame(x=c(x,x+mydeta/1000))))},
+                optimize(f=function(x){diff(predict(ret, newdata=data.frame(x=c(x,x+mydeta/1e10))))},
                          maximum=mystat, interval=k)})
 myp=as.data.frame(t(myp))
 names(myp) <- c("x", "y")
