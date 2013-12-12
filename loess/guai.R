@@ -12,7 +12,7 @@ k=diff(diff(diff(ret_p$y))>0L)
 k=k[k!=0L]
 mystat=k[1]>0
 
-#plot(ret_p$x[1:(length(ret_p$x)-2)], diff(diff(ret_p$y)), type="l")
+#plot(ret_p$x[1:(length(ret_p$x)-1)], diff(ret_p$y), type="l")
 #abline(h=0)
 
 len=length(myborders)
