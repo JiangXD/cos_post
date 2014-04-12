@@ -1,6 +1,6 @@
 settings.tex="xelatex";
 
-path myp=(-10,-8){right}..(0,-13){down}..(5,-40){right}::(10,-15){right}..(13,-42){down}..(26,-46){right};
+path myp=(-10,-8){dir(30)}..(0,-13){down}..(5,-40){right}..(13,-15){right}..(16,-38){dir(250)}..(32,-46){dir(-45)};
 
 //draw(myp);
 
@@ -31,6 +31,6 @@ for(int i=0;i<mystrlen;++i)
  
   real t=arctime(myp,myt);
   filldraw(shift(point(myp,t))*scale(myD/2.0)*unitcircle, drawpen=black+0.02, fillpen=myfp); 
-  label(scale(0.07)*baseline(substr(myseq,i,1)), point(myp,t), white+font("OT1","phv","m","n"));
+  label(scale(0.07)*baseline(substr(myseq,i,1)), point(myp,t), white+font("OT1","phv","b","n"));
   myt+=myD;
 }
